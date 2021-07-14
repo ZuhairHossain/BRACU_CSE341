@@ -15,42 +15,33 @@
         ;task-04 
         ; 5 + 8 - (3 + 1) * (9 - 2) / 4 + (2 * 3)
         
+        mov ax, 9
+        mov bx, 2
+        mov cx, 4
+        
+        sub ax,bx ; (9-2) => ax = 7
+        div cx    ; ax/4 => ax = 1, dx = 3        
+        mov cx, ax
+        
         mov ax, 3
         mov bx, 1
-        mov cx, 9
-        mov dx, 2
-    
-        add ax,bx ; (3+1)
-    
-        mov di,ax ; di = 4
-    
-        sub cx,dx ; (9-2)
-    
-        mov si,cx ; si = 7
-    
-        mov ax,3
-        mul dx    ;  (2*3)
-        mov dx,ax ; dx = 6
-    
-        mov ax,4
-        mov bx, si
-        div bx    ; bx =  (9-2) / 4
-        mov bx,ax 
-    
-        mov cx, di; cx = 4
-    
-        mul bx; bx * cx 
-    
-        mov ax, 8 
-        sub ax,bx  ; 8 - (3 + 1) * (9 -2) / 4
-    
-        mov cx,5
-        add ax,cx  ; 5 + 8 - (3 + 1) * (9 -2) / 4  
-        add ax,dx  ;
-    
-        mov ax, di ; 5 + 8 - (3 + 1) * (9 -2) / 4 + (2 * 3)
-         
+        add ax, bx; (3+1) => 4=ax
         
+        mul cx    ; 4 * 1=4=ax
+        mov cx,ax
+        
+        mov ax, 2
+        mov bx, 3
+        mul bx    ; (2*3) = 6=ax
+        
+        add cx, ax; 6+4=10 = cx
+        
+        mov ax, 5
+        mov bx, 8
+        add ax, bx; 5+8 = 13
+        
+        sub ax, cx ;ends here
+     
         ; YOUR CODE ENDS HERE
         
         MOV AX, 4C00H
