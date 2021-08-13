@@ -47,7 +47,7 @@ MAIN PROC
     
     MOV AH,1 ;
     INT 21H
-    ;MOV CL,AL ; NO MOVING THE VALUE OF AL TO ANYWHERE
+    MOV BH,AL ; NO MOVING THE VALUE OF AL TO ANYWHERE
      
     MOV AH,2                                       
     MOV DL,0DH ;LINE BREAK
@@ -55,39 +55,45 @@ MAIN PROC
     MOV DL,0AH
     INT 21H
 
+    ; a = bl
+    ; b = cl
+    ; c = bh
+    
     
     ;if al < bl
-    CMP AL, BL
-    JL  result_al_small    ; if (al < bl)
-    JMP result_bl_small   
-    jmp exit
-        result_al_small:
-               cmp cl, al
-               jl set_c    ; if (cl < al) set => c 
-               jmp set_a   ; else set => a
-               jmp exit
-               
-        result_bl_small:
-               cmp bl, cl
-               jl set_b
+    CMP BL, cL
+    JLE  result_a_small    ; if (a < b)
+    JMP result_b_small    ; else b < a
+    
+        result_a_small:
+               cmp bl, bh
+               jle set_a    ; if (a < c) set => a 
                jmp set_c
-               jmp exit
-        
-        set_c:
-        mov dl, al  ; OUTPUT 
-        int 21h
-        jmp exit
-        
+               
+        result_b_small:
+               cmp cl, al  ; if b < c
+               jle set_b
+               jmp set_c   ; else
+               
+                
         set_a:
-        mov dl, bl  ; OUTPUT 
+        mov ah,2
+        mov dl, bl  ; OUTPUT  a
         int 21h
         jmp exit
         
         set_b:
-        mov dl, cl  ; OUTPUT 
+        mov ah,2
+        mov dl, cl  ; OUTPUT   b
         int 21h
         jmp exit
         
+        set_c:
+        mov ah,2
+        mov dl, bh  ; OUTPUT    c
+        int 21h
+        jmp exit
+
         exit:  
     
 
