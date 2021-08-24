@@ -2,7 +2,7 @@
 .STACK 100H
 .DATA 
 
-array db 1,2,3,4,5
+array db 5 dup(?)
 
 ;variables 
                   
@@ -23,9 +23,7 @@ MOV DS,AX
     mov ah,9
     int 21h    
     
-    ;taking input
-    
-    mov cx,5
+    mov cx,5   ; [input in array]
     mov si,0
     mov ah,1
     

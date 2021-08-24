@@ -19,8 +19,6 @@ n db 12 dup(?)
     
     MOV AX,@DATA 
     MOV DS,AX 
-     
-    ; enter your code here  
     
     ; TAKING MY NAME AS INPUT
          
