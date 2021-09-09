@@ -11,7 +11,7 @@ MAIN PROC
     INPUT:
     MOV AH, 1
     INT 21H
-    CMP AL, 130
+    CMP AL, 13D
     JNE NUMBER
     
     JMP EXIT
